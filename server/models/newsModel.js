@@ -2,9 +2,9 @@ const sequelize = require('../db')
 const { Model, DataTypes } = require('sequelize')
 
 
-class News extends Model {}
+class Title extends Model {}
 
-News.init ({
+Title.init ({
 	id: {
 		type: DataTypes.INTEGER,
 		primaryKey: true,
@@ -26,8 +26,8 @@ News.init ({
 	body: {
 		type: DataTypes.TEXT,
 	},
-}, { sequelize, modelName: 'news' })
+}, { sequelize, modelName: 'title' })
 
 sequelize.sync()
 
-module.exports = News;
+module.exports = Title;

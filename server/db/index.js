@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize(
-  'news',
+  'news-portal',
   'admin',
   '0000',
   {
