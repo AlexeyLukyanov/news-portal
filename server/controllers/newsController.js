@@ -1,52 +1,64 @@
-const Title = require('../models/newsModel.js');
+const newsRepository = require('../repositories/newsRepository.js');
 
-exports.index = function(req, res) {
-    res.send('NOT IMPLEMENTED: Site Home Page');
-};
+// exports.index = function(req, res) {
+//     res.send('NOT IMPLEMENTED: Site Home Page');
+// };
 
 exports.news_list = function (req, res) {
-	Title.findAll().then(titles => {
-		res.send(JSON.stringify(titles))
-	})
-}
-
-exports.news_detail_get = function (req, res) {
-	const id = req.paramsId; // необходимо исправить!!!
-	Title.findByPk(id).then(news => {
+	newsRepository
+	.getLastNews()
+	.then(news => {
 		res.send(JSON.stringify(news))
 	})
-}
-
-exports.news_create_get = function (req, res) {
-	res.send('Form of news') // or res.render()
-}
-
-exports.news_create_post = function (req, res) {
-	const params = {}; // необходимо исправить, добавить валидаторы
-	Title.crete({
-		// name: params.name;
-		// body: params.body
-	}).then(resul => {
-		res.send(JSON.stringify(resul))
-	}).catch(error => {
-		// If error...
+	.catch(err => {
+		return next(err);
 	})
 }
 
-exports.news_delete_get = function (req, res) {
-	res.send('NOT IMPLEMENTED: news delete GET')
+exports.news_detail_get = function (req, res, next) {
+	const id = req.params.id; // проверить
+	newsRepository
+	.getThisNews(id)
+	.then(result => {
+		res.send(JSON.stringify(result)) 
+	})
+	.catch(err => {
+		return next(err);
+	})
 }
 
-exports.news_delete_post = function (req, res) {
-	res.send('NOT IMPLEMENTED: news delete POST')
+exports.news_create_post = function (req, res, next) {
+	const name = req.params.name; // проверить
+	const body = req.params.body; // проверить
+	newsRepository
+	.createNews(name, body)
+	.then(result => {
+		res.send(JSON.stringify(result))
+	}).catch(err => {
+		return next(err);
+	})
 }
 
-exports.news_update_get = function (req, res) {
-	res.send('NOT IMPLEMENTED: news update GET')
+exports.news_delete_post = function (req, res, next) {
+	const id = req.params.id;
+	newsRepository
+	.deleteNews(id)
+	.then(res.send('done'))
+	.catch(err => {
+		return next(err);
+	})
 }
 
-exports.news_update_post = function (req, res) {
-	res.send('NOT IMPLEMENTED: news update POST')
+exports.news_update_post = function (req, res, next) {
+	const id = req.params.id;
+	newsRepository
+	.updateNews(id)
+	.then(result => {
+		res.send(JSON.stringify(result))
+	})
+	.catch(err => {
+		return next(err);
+	})
 }
 
 
