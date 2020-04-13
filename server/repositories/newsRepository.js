@@ -13,20 +13,21 @@ exports.getThisNews = id => {
 }
 
 exports.createNews = (name, body) => {
-	return Title.crete({
+	return Title.findOrCreate({where: {
 		name,
 		body
-	}, { fields: [ 'name', 'body' ] })
+	},  fields: [ 'name', 'body' ] })
 }
 
-exports.updateNews = (id, body) => {
-	return Title.findByPk(id).then((news, body) => {
+exports.updateNews = (id, name, body) => {
+	return Title.findByPk(id).then((news) => {
 		if(news !== null){
-			news.update({
+			return news.update({
+				name,
 				body
-			}, { fields: [ 'body' ] })
+			}, { fields: [ 'name', 'body' ] })
 		} else {
-			return 'news for update not found'
+			return 'news for update not found, chek the id.'
 		}
 	})
 }
