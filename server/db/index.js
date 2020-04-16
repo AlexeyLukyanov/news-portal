@@ -1,13 +1,14 @@
 const Sequelize = require('sequelize');
+const config = require('../config/config.json');
 
 const sequelize = new Sequelize(
-  'news-portal',
-  'admin',
-  '0000',
+  config.development.database,
+  config.development.username,
+  config.development.password,
   {
-    host: 'localhost',
-    dialect: 'postgres',
-    port: 5432
+    host: config.development.host,
+    dialect: config.development.dialect,
+    port: config.development.databasePort
   }
 );
 

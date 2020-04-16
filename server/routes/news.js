@@ -3,10 +3,8 @@ const router = express.Router();
 
 const news_controller = require('../controllers/newsController.js');
 
-// get catalog home page
+// get last 10 news
 router.get('/', news_controller.news_list);
-
-
 
 //get request for one news
 router.get('/:id', news_controller.news_detail_get);
