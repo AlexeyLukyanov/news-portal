@@ -15,7 +15,7 @@
     "express-paginate": "^1.0.0",
     "express-validator": "^6.4.0",
     "http-errors": "~1.6.3",
-    "knex": "^0.20.13",
+    "knex": "^2.4.0",
     "morgan": "~1.9.1",
     "pg": "^8.0.0",
     "pg-hstore": "^2.3.3",
